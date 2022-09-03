@@ -10,35 +10,42 @@ public class Imc {
         this.sexo = sexo;
     }
 
+    private void verificarValores() {
+        if (this.altura == 0) {
+            throw new IllegalArgumentException("Altura nao pode ser zero");
+        }
+        if (this.peso <= 0) {
+            throw new IllegalArgumentException("Peso nao pode ser menor ou igual a zero");
+        }
+        if (!(this.sexo.equals("F") || this.sexo.equals("M"))) {
+            throw new IllegalArgumentException("Sexo inválido");
+        }
+    }
+
     public String calcularImc() {
         float imc;
+        verificarValores();
         imc = this.peso / (this.altura * this.altura);
         if (this.sexo.equals("F")) {
             if (imc < 19.1f) {
                 return "abaixo do peso";
-            }
-            else {
+            } else {
                 if (imc < 25.8f) {
                     return "no peso normal";
-                }
-                else {
+                } else {
                     if (imc < 27.3f) {
                         return "marginalmente acima do peso";
-                    }
-                    else {
+                    } else {
                         if (imc < 32.3f) {
                             return "acima do peso ideal";
-                        }
-                        else {
+                        } else {
                             return "obeso";
                         }
                     }
                 }
             }
         }
-        else {
-            return null;
-        }
+    return null;
     }
 
 }
